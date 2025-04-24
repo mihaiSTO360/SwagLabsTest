@@ -20,5 +20,6 @@ public class StandardUserTest extends BaseTest {
         loginPage.fillPasswordField("secret_sauce");
         loginPage.clickOnLoginButton();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+
     }
 }
