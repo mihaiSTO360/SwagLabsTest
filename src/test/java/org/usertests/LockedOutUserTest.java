@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class StandardUserTest extends BaseTest {
+public class LockedOutUserTest extends BaseTest {
     LoginPage loginPage;
 
     @BeforeMethod
@@ -15,11 +15,12 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void standardUserSuccessfulLogin() {
-        loginPage.fillUsernameField("standard_user");
+    public void lockedOutUserSuccessfulLogin() {
+        loginPage.fillUsernameField("locked_out_user");
         loginPage.fillPasswordField("secret_sauce");
         loginPage.clickOnLoginButton();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Sorry, this user has been locked out.");
 
     }
 }
