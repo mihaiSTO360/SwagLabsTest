@@ -13,6 +13,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--force-device-scale-factor=0.75");
         options.addArguments("--start-maximized");
+        options.addArguments("--incognito");
         driver = new ChromeDriver(options);
         driver.get("https://www.saucedemo.com/");
     }
