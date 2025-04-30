@@ -1,6 +1,7 @@
 package org.usertests;
 
 import org.BaseTest;
+import org.pageobject.CheckoutPage;
 import org.pageobject.LoginPage;
 import org.pageobject.MainPage;
 import org.testng.Assert;
@@ -12,11 +13,13 @@ import java.util.Set;
 public class StandardUserTest extends BaseTest {
     LoginPage loginPage;
     MainPage mainPage;
+    CheckoutPage checkoutPage;
 
     @BeforeMethod
     public void setUpPages() {
         loginPage = new LoginPage(driver);
         mainPage = new MainPage(driver);
+        checkoutPage = new CheckoutPage(driver);
     }
 
     @Test
@@ -77,6 +80,23 @@ public class StandardUserTest extends BaseTest {
             }
         }
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.linkedin.com/company/sauce-labs/");
+    }
+
+    @Test
+    public void addingAllProductsToCartTest() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.addBackpackToCart();
+        mainPage.addBikeLightToCart();
+        mainPage.addBoltTShirtToCart();
+        mainPage.addFleeceJacketToCart();
+        mainPage.addOnesieToCart();
+        mainPage.addRedTShirtToCart();
+        mainPage.clickOnShoppingCartSelector();
+        int expectedCount = 6;
+        checkoutPage.getCheckoutItemsNumber();
+        Assert.assertEquals(checkoutPage.checkoutItemCount, expectedCount);
     }
 }
 
