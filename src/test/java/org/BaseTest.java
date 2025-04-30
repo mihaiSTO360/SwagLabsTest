@@ -17,9 +17,8 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.get("https://www.saucedemo.com/");
     }
-
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
-    }
+//
+//    @AfterClass
+//    // public void tearDown() {
+//    // driver.quit();
 }
