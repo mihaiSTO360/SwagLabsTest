@@ -2,13 +2,18 @@ package org.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class MainPage extends LoginPage {
 
     public final By shoppingCartSelector = By.cssSelector("a.shopping_cart_link");
-    public final By addToCartSelector = By.cssSelector(".inventory_list .inventory_item:nth-child(1) button.btn_inventory");
-    //    nth-child(2) înseamnă "al doilea copil al părintelui său", deci funcționează doar dacă butoanele sunt
-//    frați între ei (adică apar pe același nivel în DOM).
+//    public final By addToCartSelector = By.cssSelector(".inventory_list .inventory_item:nth-child(1) button.btn_inventory");
+//    //    nth-child(2) înseamnă "al doilea copil al părintelui său", deci funcționează doar dacă butoanele sunt
+////    frați între ei (adică apar pe același nivel în DOM).
     public final By backpackItemSelector = By.xpath("//div[.='Sauce Labs Backpack']");
     public final By backpackAddToCartSelector = By.cssSelector("button[id='add-to-cart-sauce-labs-backpack']");
     public final By bikeLightItemSelector = By.xpath("//div[.='Sauce Labs Bike Light']");
@@ -25,6 +30,13 @@ public class MainPage extends LoginPage {
     public final By facebookButtonSelector = By.cssSelector("a[data-test='social-facebook']");
     public final By linkedinButtonSelector = By.cssSelector("a[data-test='social-linkedin']");
     public final By backToProductsButtonSelector = By.cssSelector("button[id='back-to-products']");
+    public final By burgerMenuSelector = By.cssSelector("button[id='react-burger-menu-btn']");
+    public final By aboutPageSelector = By.cssSelector("a[id='about_sidebar_link']");
+    public final By logOutPageSelector = By.cssSelector("a[id='logout_sidebar_link']");
+    public final By allItemsPageSelector = By.cssSelector("a[id='inventory_sidebar_link']");
+    public final By resetAppStateSelector = By.cssSelector("a[id='reset_sidebar_link']");
+    Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -97,5 +109,29 @@ public class MainPage extends LoginPage {
     public void clickOnBackToProductsButton() {
         driver.findElement(backToProductsButtonSelector).click();
     }
+
+    public void clickOnBurgerMenuButton() {
+        driver.findElement(burgerMenuSelector).click();
+    }
+
+    public void clickOnAboutPage() {
+        wait.until(ExpectedConditions.elementToBeClickable(aboutPageSelector)).click();
+
+    }
+
+    public void clickOnLogoutPage() {
+        wait.until(ExpectedConditions.elementToBeClickable(logOutPageSelector)).click();
+
+    }
+
+    public void clickOnAllItemsPage() {
+        wait.until(ExpectedConditions.elementToBeClickable(allItemsPageSelector)).click();
+
+    }
+    public void clickOnResetAppState() {
+        wait.until(ExpectedConditions.elementToBeClickable(resetAppStateSelector)).click();
+
+    }
+
 
 }

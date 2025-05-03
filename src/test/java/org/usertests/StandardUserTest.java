@@ -124,7 +124,7 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void noFirstNameAtChecout() {
+    public void noFirstNameAtCheckoutTest() {
         loginPage.fillUsernameField("standard_user");
         loginPage.fillPasswordField("secret_sauce");
         loginPage.clickOnLoginButton();
@@ -140,7 +140,7 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void noLastNameAtChecout() {
+    public void noLastNameAtCheckoutTest() {
         loginPage.fillUsernameField("standard_user");
         loginPage.fillPasswordField("secret_sauce");
         loginPage.clickOnLoginButton();
@@ -156,7 +156,7 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void noPostalCodeAtChecout() {
+    public void noPostalCodeAtChekcoutTest() {
         loginPage.fillUsernameField("standard_user");
         loginPage.fillPasswordField("secret_sauce");
         loginPage.clickOnLoginButton();
@@ -172,7 +172,7 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void openEveryItemPage() {
+    public void openEveryItemPageTest() {
         loginPage.fillUsernameField("standard_user");
         loginPage.fillPasswordField("secret_sauce");
         loginPage.clickOnLoginButton();
@@ -194,6 +194,55 @@ public class StandardUserTest extends BaseTest {
         mainPage.openRedTShirtItemPage();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=3");
     }
+
+    @Test
+    public void aboutPageTest() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnAboutPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://saucelabs.com/");
+
+    }
+
+    @Test
+    public void logOutTest() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnLogoutPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+
+    }
+
+    @Test
+    public void allItemsButtonTest() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.openBackpackItemPage();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnAllItemsPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+
+    }
+
+    @Test
+    public void resetAppStateTest(){
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnResetAppState();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.getCheckoutItemsNumber();
+        Assert.assertEquals(checkoutPage.checkoutItemCount, 0);
+    }
 }
+
+
 
 
