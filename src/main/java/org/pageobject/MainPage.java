@@ -2,16 +2,20 @@ package org.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainPage extends LoginPage {
 
     public final By shoppingCartSelector = By.cssSelector("a.shopping_cart_link");
-//    public final By addToCartSelector = By.cssSelector(".inventory_list .inventory_item:nth-child(1) button.btn_inventory");
+    //    public final By addToCartSelector = By.cssSelector(".inventory_list .inventory_item:nth-child(1) button.btn_inventory");
 //    nth-child(2) înseamnă "al doilea copil al părintelui său", deci funcționează doar dacă butoanele sunt
 //    frați între ei (adică apar pe același nivel în DOM).
     public final By backpackItemSelector = By.xpath("//div[.='Sauce Labs Backpack']");
@@ -35,6 +39,7 @@ public class MainPage extends LoginPage {
     public final By logOutPageSelector = By.cssSelector("a[id='logout_sidebar_link']");
     public final By allItemsPageSelector = By.cssSelector("a[id='inventory_sidebar_link']");
     public final By resetAppStateSelector = By.cssSelector("a[id='reset_sidebar_link']");
+    public final By filterMenu = By.cssSelector("select.product_sort_container");
     Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
 
@@ -128,10 +133,29 @@ public class MainPage extends LoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(allItemsPageSelector)).click();
 
     }
+
     public void clickOnResetAppState() {
         wait.until(ExpectedConditions.elementToBeClickable(resetAppStateSelector)).click();
 
     }
 
+    public void clickOnFilterMenu() {driver.findElement(filterMenu).click();
+    }
 
+    public void filterMenu(String filterOption) {
+        WebElement dropdown = driver.findElement(filterMenu);
+        Select sortSelect = new Select(dropdown);
+        sortSelect.selectByValue(filterOption);
+    }
+
+    public List<Double> getAllProductPrices() {
+        List<WebElement> priceElements = driver.findElements(By.className("inventory_item_price"));
+        List<Double> prices = new ArrayList<>();
+        for (WebElement price : priceElements) {
+            String text = price.getText().replace("$", "").trim();
+            prices.add(Double.parseDouble(text));
+        }
+        return prices;
+    }
 }
+
