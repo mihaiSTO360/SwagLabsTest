@@ -16,7 +16,7 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    public void standardLogin(){
+    public void standardLogin() {
         fillUsernameField("standard_user");
         fillPasswordField("secret_sauce");
         clickOnLoginButton();
@@ -34,7 +34,7 @@ public class LoginPage {
         driver.findElement(loginButton).click();
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return driver.findElement(errorMessageSelector).getText();
     }
 }
