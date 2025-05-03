@@ -17,6 +17,7 @@ public class CheckoutPage extends LoginPage {
     public final By continueCheckoutSelector = By.cssSelector("input[id='continue']");
     public final By finishCheckoutSelector = By.cssSelector("button[id='finish']");
     public final By confirmationOrderPlacedMessageSelector = By.cssSelector("div.complete-text");
+    public final By CheckoutErrorMessageSelector = By.cssSelector("h3[data-test='error']");
     public int checkoutItemCount = 0;
 
     public CheckoutPage(ChromeDriver driver) {
@@ -67,7 +68,11 @@ public class CheckoutPage extends LoginPage {
         driver.findElement(finishCheckoutSelector).click();
     }
 
-    public String orderPlacedSuccessfullyMessage(){
+    public String orderPlacedSuccessfullyMessage() {
         return driver.findElement(confirmationOrderPlacedMessageSelector).getText();
+    }
+
+    public String checkoutFillInErrorMessage() {
+        return driver.findElement(CheckoutErrorMessageSelector).getText();
     }
 }

@@ -123,6 +123,53 @@ public class StandardUserTest extends BaseTest {
         Assert.assertEquals(checkoutPage.orderPlacedSuccessfullyMessage(), "Your order has been dispatched, and will arrive just as fast as the pony can get there!");
     }
 
+    @Test
+    public void noFirstNameAtChecout() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.clickOnCheckoutButtonSelector();
+        String lastname = faker.name().lastName();
+        checkoutPage.fillInLastNameField(lastname);
+        String zipcode = faker.address().zipCode();
+        checkoutPage.fillInZipCodeField(zipcode);
+        checkoutPage.clickOnContinueCheckout();
+        Assert.assertEquals(checkoutPage.checkoutFillInErrorMessage(), "Error: First Name is required");
+    }
+
+    @Test
+    public void noLastNameAtChecout() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.clickOnCheckoutButtonSelector();
+        String firstname = faker.name().firstName();
+        checkoutPage.fillInFirstNameField(firstname);
+        String zipcode = faker.address().zipCode();
+        checkoutPage.fillInZipCodeField(zipcode);
+        checkoutPage.clickOnContinueCheckout();
+        Assert.assertEquals(checkoutPage.checkoutFillInErrorMessage(), "Error: Last Name is required");
+    }
+
+    @Test
+    public void noPostalCodeAtChecout() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.clickOnCheckoutButtonSelector();
+        String firstname = faker.name().firstName();
+        checkoutPage.fillInFirstNameField(firstname);
+        String lastname = faker.name().lastName();
+        checkoutPage.fillInLastNameField(lastname);
+        checkoutPage.clickOnContinueCheckout();
+        Assert.assertEquals(checkoutPage.checkoutFillInErrorMessage(), "Error: Postal Code is required");
+    }
 
 }
 
