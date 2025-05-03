@@ -1,5 +1,6 @@
 package org.usertests;
 
+import com.github.javafaker.Faker;
 import org.BaseTest;
 import org.pageobject.CheckoutPage;
 import org.pageobject.LoginPage;
@@ -14,9 +15,11 @@ public class StandardUserTest extends BaseTest {
     LoginPage loginPage;
     MainPage mainPage;
     CheckoutPage checkoutPage;
+    Faker faker;
 
     @BeforeMethod
     public void setUpPages() {
+        faker = new Faker();
         loginPage = new LoginPage(driver);
         mainPage = new MainPage(driver);
         checkoutPage = new CheckoutPage(driver);
@@ -83,7 +86,7 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void addingAllProductsToCartTest() {
+    public void addingToCartAndRemovingAllProductsTest() {
         loginPage.fillUsernameField("standard_user");
         loginPage.fillPasswordField("secret_sauce");
         loginPage.clickOnLoginButton();
@@ -94,10 +97,33 @@ public class StandardUserTest extends BaseTest {
         mainPage.addOnesieToCart();
         mainPage.addRedTShirtToCart();
         mainPage.clickOnShoppingCartSelector();
-        int expectedCount = 6;
         checkoutPage.getCheckoutItemsNumber();
-        Assert.assertEquals(checkoutPage.checkoutItemCount, expectedCount);
+        Assert.assertEquals(checkoutPage.checkoutItemCount, 6);
+        checkoutPage.removeItemsFromCheckout();
+        checkoutPage.getCheckoutItemsNumber();
+        Assert.assertEquals(checkoutPage.checkoutItemCount, 0);
     }
+
+    @Test
+    public void placingAnOrderTest() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.clickOnCheckoutButtonSelector();
+        String firstname = faker.name().firstName();
+        checkoutPage.fillInFirstNameField(firstname);
+        String lastname = faker.name().lastName();
+        checkoutPage.fillInLastNameField(lastname);
+        String zipcode = faker.address().zipCode();
+        checkoutPage.fillInZipCodeField(zipcode);
+        checkoutPage.clickOnContinueCheckout();
+        checkoutPage.clickOnFinishCheckout();
+        Assert.assertEquals(checkoutPage.orderPlacedSuccessfullyMessage(), "Your order has been dispatched, and will arrive just as fast as the pony can get there!");
+    }
+
+
 }
 
 
