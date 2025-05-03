@@ -27,18 +27,14 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void standardUserSuccessfulLogin() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
     }
 
     @Test
     public void socialMediaTwitterButtonTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         String originalWindow = driver.getWindowHandle();
         mainPage.clickOnTwitterButton();
         Set<String> windowHandles = driver.getWindowHandles();
@@ -53,9 +49,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void socialMediaFacebookButtonTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         String originalWindow = driver.getWindowHandle();
         mainPage.clickOnFacebookButtonSelector();
         Set<String> windowHandles = driver.getWindowHandles();
@@ -70,9 +64,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void socialMediaLinkedinButtonTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         String originalWindow = driver.getWindowHandle();
         mainPage.clickOnLinkedinButtonSelector();
         Set<String> windowHandles = driver.getWindowHandles();
@@ -87,9 +79,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void addingToCartAndRemovingAllProductsTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.addBackpackToCart();
         mainPage.addBikeLightToCart();
         mainPage.addBoltTShirtToCart();
@@ -106,9 +96,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void placingAnOrderTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.addBackpackToCart();
         mainPage.clickOnShoppingCartSelector();
         checkoutPage.clickOnCheckoutButtonSelector();
@@ -125,9 +113,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void noFirstNameAtCheckoutTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.addBackpackToCart();
         mainPage.clickOnShoppingCartSelector();
         checkoutPage.clickOnCheckoutButtonSelector();
@@ -141,9 +127,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void noLastNameAtCheckoutTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.addBackpackToCart();
         mainPage.clickOnShoppingCartSelector();
         checkoutPage.clickOnCheckoutButtonSelector();
@@ -157,9 +141,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void noPostalCodeAtChekcoutTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.addBackpackToCart();
         mainPage.clickOnShoppingCartSelector();
         checkoutPage.clickOnCheckoutButtonSelector();
@@ -173,9 +155,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void openEveryItemPageTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.openBackpackItemPage();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=4");
         mainPage.clickOnBackToProductsButton();
@@ -197,9 +177,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void aboutPageTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.clickOnBurgerMenuButton();
         mainPage.clickOnAboutPage();
         Assert.assertEquals(driver.getCurrentUrl(), "https://saucelabs.com/");
@@ -208,9 +186,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void logOutTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.clickOnBurgerMenuButton();
         mainPage.clickOnLogoutPage();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
@@ -219,9 +195,7 @@ public class StandardUserTest extends BaseTest {
 
     @Test
     public void allItemsButtonTest() {
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.standardLogin();
         mainPage.openBackpackItemPage();
         mainPage.clickOnBurgerMenuButton();
         mainPage.clickOnAllItemsPage();
@@ -230,10 +204,8 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void resetAppStateTest(){
-        loginPage.fillUsernameField("standard_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+    public void resetAppStateTest() {
+        loginPage.standardLogin();
         mainPage.addBackpackToCart();
         mainPage.clickOnBurgerMenuButton();
         mainPage.clickOnResetAppState();
