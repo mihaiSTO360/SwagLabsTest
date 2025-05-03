@@ -16,6 +16,12 @@ public class LoginPage {
         this.driver = driver;
     }
 
+    public void standardLogin(){
+        fillUsernameField("standard_user");
+        fillPasswordField("secret_sauce");
+        clickOnLoginButton();
+    }
+
     public void fillUsernameField(String username) {
         driver.findElement(usernameFieldSelector).sendKeys(username);
     }
