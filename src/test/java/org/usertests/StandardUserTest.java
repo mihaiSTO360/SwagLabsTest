@@ -171,6 +171,29 @@ public class StandardUserTest extends BaseTest {
         Assert.assertEquals(checkoutPage.checkoutFillInErrorMessage(), "Error: Postal Code is required");
     }
 
+    @Test
+    public void openEveryItemPage() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.fillPasswordField("secret_sauce");
+        loginPage.clickOnLoginButton();
+        mainPage.openBackpackItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=4");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openBikeLightItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=0");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openBoltTShirtItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=1");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openFleeceJacketItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=5");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openOnesieItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=2");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openRedTShirtItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=3");
+    }
 }
 
 

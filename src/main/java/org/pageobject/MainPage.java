@@ -24,6 +24,7 @@ public class MainPage extends LoginPage {
     public final By twitterButtonSelector = By.cssSelector("a[data-test='social-twitter']");
     public final By facebookButtonSelector = By.cssSelector("a[data-test='social-facebook']");
     public final By linkedinButtonSelector = By.cssSelector("a[data-test='social-linkedin']");
+    public final By backToProductsButtonSelector = By.cssSelector("button[id='back-to-products']");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -69,5 +70,32 @@ public class MainPage extends LoginPage {
         driver.findElement(shoppingCartSelector).click();
     }
 
+    public void openBackpackItemPage() {
+        driver.findElement(backpackItemSelector).click();
+    }
+
+    public void openBikeLightItemPage() {
+        driver.findElement(bikeLightItemSelector).click();
+    }
+
+    public void openBoltTShirtItemPage() {
+        driver.findElement(boltTShirtItemSelector).click();
+    }
+
+    public void openFleeceJacketItemPage() {
+        driver.findElement(fleeceJacketItemSelector).click();
+    }
+
+    public void openOnesieItemPage() {
+        driver.findElement(onesieItemSelector).click();
+    }
+
+    public void openRedTShirtItemPage() {
+        driver.findElement(redTShirtItemSelector).click();
+    }
+
+    public void clickOnBackToProductsButton() {
+        driver.findElement(backToProductsButtonSelector).click();
+    }
 
 }
