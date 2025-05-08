@@ -2,7 +2,7 @@ package org;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-//import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
@@ -18,8 +18,8 @@ public class BaseTest {
         driver.get("https://www.saucedemo.com/");
     }
 
-//    @AfterClass
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
 }
