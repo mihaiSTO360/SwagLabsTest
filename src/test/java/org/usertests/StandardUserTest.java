@@ -240,6 +240,16 @@ public class StandardUserTest extends BaseTest {
         Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate descrescător!");
     }
 
+    @Test
+    public void continueShoppingButtonTest() {
+        loginPage.standardLogin();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.clickOnContinueShoppingButton();
+        Assert.assertEquals(driver.getCurrentUrl(),"https://www.saucedemo.com/inventory.html");
+
+    }
+
 }
 
 
