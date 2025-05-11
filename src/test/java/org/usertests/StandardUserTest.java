@@ -36,6 +36,14 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
+    public void standardUserNoPasswordLogin() {
+        loginPage.fillUsernameField("standard_user");
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
+    }
+
+    @Test
     public void socialMediaTwitterButtonTest() {
         loginPage.standardLogin();
         String originalWindow = driver.getWindowHandle();
@@ -246,7 +254,7 @@ public class StandardUserTest extends BaseTest {
         mainPage.addBackpackToCart();
         mainPage.clickOnShoppingCartSelector();
         checkoutPage.clickOnContinueShoppingButton();
-        Assert.assertEquals(driver.getCurrentUrl(),"https://www.saucedemo.com/inventory.html");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
     }
 

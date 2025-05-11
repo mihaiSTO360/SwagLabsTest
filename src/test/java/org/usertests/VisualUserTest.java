@@ -18,6 +18,14 @@ public class VisualUserTest extends BaseTest {
     public void visualUserSuccessfulLogin() {
         loginPage.visualLogin();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+    }
+
+    @Test
+    public void visualUserNoPasswordLogin() {
+        loginPage.fillUsernameField("visual_user");
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
 
     }
 }
