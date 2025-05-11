@@ -16,9 +16,7 @@ public class VisualUserTest extends BaseTest {
 
     @Test
     public void visualUserSuccessfulLogin() {
-        loginPage.fillUsernameField("visual_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.visualLogin();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
     }

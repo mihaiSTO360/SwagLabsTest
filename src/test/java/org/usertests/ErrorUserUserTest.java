@@ -16,9 +16,7 @@ public class ErrorUserUserTest extends BaseTest {
 
     @Test
     public void errorUserSuccessfulLogin() {
-        loginPage.fillUsernameField("error_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.errorLogin();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
     }

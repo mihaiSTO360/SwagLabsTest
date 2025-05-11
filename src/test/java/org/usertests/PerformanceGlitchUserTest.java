@@ -16,9 +16,7 @@ public class PerformanceGlitchUserTest extends BaseTest {
 
     @Test
     public void performanceGlitchUserSuccessfulLogin() {
-        loginPage.fillUsernameField("performance_glitch_user");
-        loginPage.fillPasswordField("secret_sauce");
-        loginPage.clickOnLoginButton();
+        loginPage.performanceLogin();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
     }
