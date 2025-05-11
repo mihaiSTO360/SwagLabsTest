@@ -22,6 +22,36 @@ public class LoginPage {
         clickOnLoginButton();
     }
 
+    public void lockedOutLogin() {
+        fillUsernameField("locked_out_user");
+        fillPasswordField("secret_sauce");
+        clickOnLoginButton();
+    }
+
+    public void problemLogin() {
+        fillUsernameField("problem_user");
+        fillPasswordField("secret_sauce");
+        clickOnLoginButton();
+    }
+
+    public void performanceLogin() {
+        fillUsernameField("performance_glitch_user");
+        fillPasswordField("secret_sauce");
+        clickOnLoginButton();
+    }
+
+    public void errorLogin() {
+        fillUsernameField("error_user");
+        fillPasswordField("secret_sauce");
+        clickOnLoginButton();
+    }
+
+    public void visualLogin() {
+        fillUsernameField("visual_user");
+        fillPasswordField("secret_sauce");
+        clickOnLoginButton();
+    }
+
     public void fillUsernameField(String username) {
         driver.findElement(usernameFieldSelector).sendKeys(username);
     }
