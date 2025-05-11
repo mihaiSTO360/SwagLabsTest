@@ -18,6 +18,15 @@ public class ErrorUserUserTest extends BaseTest {
     public void errorUserSuccessfulLogin() {
         loginPage.errorLogin();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+    }
+
+    @Test
+    public void errorUserNoPasswordLogin() {
+        loginPage.fillUsernameField("error_user");
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
 
     }
+
 }

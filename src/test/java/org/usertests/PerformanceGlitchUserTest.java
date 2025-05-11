@@ -20,4 +20,15 @@ public class PerformanceGlitchUserTest extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
 
     }
+
+    @Test
+    public void performanceGlitchUserNoPasswordLogin() {
+        loginPage.fillUsernameField("performance_glitch_user");
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
+
+    }
+
+
 }
