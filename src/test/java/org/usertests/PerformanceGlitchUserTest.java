@@ -9,6 +9,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class PerformanceGlitchUserTest extends BaseTest {
@@ -231,6 +234,29 @@ public class PerformanceGlitchUserTest extends BaseTest {
         mainPage.clickOnShoppingCartSelector();
         checkoutPage.getCheckoutItemsNumber();
         Assert.assertEquals(checkoutPage.checkoutItemCount, 0);
+    }
+
+    @Test
+    public void lowHighPriceFilterTest() {
+        loginPage.performanceLogin();
+        mainPage.clickOnFilterMenu();
+        mainPage.filterMenu("lohi");
+        List<Double> actualPrices = mainPage.getAllProductPrices();
+        List<Double> expectedPrices = new ArrayList<>(actualPrices);
+        Collections.sort(expectedPrices);
+        Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate crescător!");
+
+    }
+
+    @Test
+    public void highLowPriceFilterTest() {
+        loginPage.performanceLogin();
+        mainPage.clickOnFilterMenu();
+        mainPage.filterMenu("hilo");
+        List<Double> actualPrices = mainPage.getAllProductPrices();
+        List<Double> expectedPrices = new ArrayList<>(actualPrices);
+        Collections.sort(expectedPrices, Collections.reverseOrder());
+        Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate descrescător!");
     }
 
 }
