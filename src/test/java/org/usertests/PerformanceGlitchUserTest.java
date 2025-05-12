@@ -194,4 +194,43 @@ public class PerformanceGlitchUserTest extends BaseTest {
 
     }
 
+    @Test
+    public void aboutPageTest() {
+        loginPage.performanceLogin();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnAboutPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://saucelabs.com/");
+
+    }
+
+    @Test
+    public void logOutTest() {
+        loginPage.performanceLogin();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnLogoutPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+
+    }
+
+    @Test
+    public void allItemsButtonTest() {
+        loginPage.performanceLogin();
+        mainPage.openBackpackItemPage();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnAllItemsPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+
+    }
+
+    @Test
+    public void resetAppStateTest() {
+        loginPage.performanceLogin();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnBurgerMenuButton();
+        mainPage.clickOnResetAppState();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.getCheckoutItemsNumber();
+        Assert.assertEquals(checkoutPage.checkoutItemCount, 0);
+    }
+
 }
