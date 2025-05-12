@@ -145,4 +145,53 @@ public class PerformanceGlitchUserTest extends BaseTest {
         Assert.assertEquals(checkoutPage.checkoutFillInErrorMessage(), "Error: Postal Code is required");
     }
 
+    @Test
+    public void addingToCartAndRemovingAllProductsTest() {
+        loginPage.performanceLogin();
+        mainPage.addBackpackToCart();
+        mainPage.addBikeLightToCart();
+        mainPage.addBoltTShirtToCart();
+        mainPage.addFleeceJacketToCart();
+        mainPage.addOnesieToCart();
+        mainPage.addRedTShirtToCart();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.getCheckoutItemsNumber();
+        Assert.assertEquals(checkoutPage.checkoutItemCount, 6);
+        checkoutPage.removeItemsFromCheckout();
+        checkoutPage.getCheckoutItemsNumber();
+        Assert.assertEquals(checkoutPage.checkoutItemCount, 0);
+    }
+
+    @Test
+    public void openEveryItemPageTest() {
+        loginPage.performanceLogin();
+        mainPage.openBackpackItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=4");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openBikeLightItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=0");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openBoltTShirtItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=1");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openFleeceJacketItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=5");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openOnesieItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=2");
+        mainPage.clickOnBackToProductsButton();
+        mainPage.openRedTShirtItemPage();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory-item.html?id=3");
+    }
+
+    @Test
+    public void continueShoppingButtonTest() {
+        loginPage.performanceLogin();
+        mainPage.addBackpackToCart();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.clickOnContinueShoppingButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+
+    }
+
 }
