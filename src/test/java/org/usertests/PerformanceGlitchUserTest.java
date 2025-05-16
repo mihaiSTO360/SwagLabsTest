@@ -135,7 +135,7 @@ public class PerformanceGlitchUserTest extends BaseTest {
     }
 
     @Test
-    public void noPostalCodeAtChekcoutTest() {
+    public void noPostalCodeAtCheckoutTest() {
         loginPage.performanceLogin();
         mainPage.addBackpackToCart();
         mainPage.clickOnShoppingCartSelector();
