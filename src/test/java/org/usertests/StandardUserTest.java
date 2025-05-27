@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -41,6 +41,16 @@ public class StandardUserTest extends BaseTest {
         loginPage.clickOnLoginButton();
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
         Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
+    }
+
+    @Test
+    public void standardUserRandomPasswordLogin() {
+        loginPage.fillUsernameField("standard_user");
+        String password = faker.internet().password();
+        loginPage.fillPasswordField(password);
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
     }
 
     @Test
@@ -151,7 +161,7 @@ public class StandardUserTest extends BaseTest {
     }
 
     @Test
-    public void noPostalCodeAtChekcoutTest() {
+    public void noPostalCodeAtCheckoutTest() {
         loginPage.standardLogin();
         mainPage.addBackpackToCart();
         mainPage.clickOnShoppingCartSelector();
@@ -218,6 +228,12 @@ public class StandardUserTest extends BaseTest {
     public void resetAppStateTest() {
         loginPage.standardLogin();
         mainPage.addBackpackToCart();
+        mainPage.addBoltTShirtToCart();
+        checkoutPage.getCheckoutItemsNumber();
+        mainPage.clickOnShoppingCartSelector();
+        checkoutPage.getCheckoutItemsNumber();
+        Assert.assertEquals(checkoutPage.checkoutItemCount, 2);
+        checkoutPage.clickOnContinueShoppingButton();
         mainPage.clickOnBurgerMenuButton();
         mainPage.clickOnResetAppState();
         mainPage.clickOnShoppingCartSelector();
@@ -232,7 +248,7 @@ public class StandardUserTest extends BaseTest {
         mainPage.filterMenu("lohi");
         List<Double> actualPrices = mainPage.getAllProductPrices();
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
-        Collections.sort(expectedPrices);
+        expectedPrices.sort(Comparator.naturalOrder());
         Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate crescător!");
 
     }
@@ -244,7 +260,7 @@ public class StandardUserTest extends BaseTest {
         mainPage.filterMenu("hilo");
         List<Double> actualPrices = mainPage.getAllProductPrices();
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
-        Collections.sort(expectedPrices, Collections.reverseOrder());
+        expectedPrices.sort(Comparator.reverseOrder());
         Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate descrescător!");
     }
 

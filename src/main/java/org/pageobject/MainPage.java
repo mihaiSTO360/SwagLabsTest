@@ -14,6 +14,7 @@ import java.util.List;
 
 public class MainPage extends LoginPage {
 
+    Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
     public final By shoppingCartSelector = By.cssSelector("a.shopping_cart_link");
     public final By backpackItemSelector = By.xpath("//div[.='Sauce Labs Backpack']");
     public final By backpackAddToCartSelector = By.cssSelector("button[id='add-to-cart-sauce-labs-backpack']");
@@ -37,7 +38,6 @@ public class MainPage extends LoginPage {
     public final By allItemsPageSelector = By.cssSelector("a[id='inventory_sidebar_link']");
     public final By resetAppStateSelector = By.cssSelector("a[id='reset_sidebar_link']");
     public final By filterMenu = By.cssSelector("select.product_sort_container");
-    Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
 
     public MainPage(WebDriver driver) {
@@ -117,23 +117,19 @@ public class MainPage extends LoginPage {
     }
 
     public void clickOnAboutPage() {
-        wait.until(ExpectedConditions.elementToBeClickable(aboutPageSelector)).click();
-
+       wait.until(ExpectedConditions.elementToBeClickable(aboutPageSelector)).click();
     }
 
     public void clickOnLogoutPage() {
         wait.until(ExpectedConditions.elementToBeClickable(logOutPageSelector)).click();
-
     }
 
     public void clickOnAllItemsPage() {
         wait.until(ExpectedConditions.elementToBeClickable(allItemsPageSelector)).click();
-
     }
 
     public void clickOnResetAppState() {
         wait.until(ExpectedConditions.elementToBeClickable(resetAppStateSelector)).click();
-
     }
 
     public void clickOnFilterMenu() {
