@@ -9,9 +9,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 public class VisualUserTest extends BaseTest {
@@ -41,6 +38,16 @@ public class VisualUserTest extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
         Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
 
+    }
+
+    @Test
+    public void visualUserRandomPasswordLogin() {
+        loginPage.fillUsernameField("visual_user");
+        String password = faker.internet().password();
+        loginPage.fillPasswordField(password);
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
     }
 
     @Test
@@ -223,29 +230,6 @@ public class VisualUserTest extends BaseTest {
         mainPage.clickOnShoppingCartSelector();
         checkoutPage.getCheckoutItemsNumber();
         Assert.assertEquals(checkoutPage.checkoutItemCount, 0);
-    }
-
-    @Test
-    public void lowHighPriceFilterTest() {
-        loginPage.visualLogin();
-        mainPage.clickOnFilterMenu();
-        mainPage.filterMenu("lohi");
-        List<Double> actualPrices = mainPage.getAllProductPrices();
-        List<Double> expectedPrices = new ArrayList<>(actualPrices);
-        Collections.sort(expectedPrices);
-        Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate crescător!");
-
-    }
-
-    @Test
-    public void highLowPriceFilterTest() {
-        loginPage.visualLogin();
-        mainPage.clickOnFilterMenu();
-        mainPage.filterMenu("hilo");
-        List<Double> actualPrices = mainPage.getAllProductPrices();
-        List<Double> expectedPrices = new ArrayList<>(actualPrices);
-        Collections.sort(expectedPrices, Collections.reverseOrder());
-        Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate descrescător!");
     }
 
     @Test

@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -42,6 +42,16 @@ public class PerformanceGlitchUserTest extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
         Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
 
+    }
+
+    @Test
+    public void performanceGlitchUserRandomPasswordLogin() {
+        loginPage.fillUsernameField("performance_glitch_user");
+        String password = faker.internet().password();
+        loginPage.fillPasswordField(password);
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
     }
 
     @Test
@@ -243,7 +253,7 @@ public class PerformanceGlitchUserTest extends BaseTest {
         mainPage.filterMenu("lohi");
         List<Double> actualPrices = mainPage.getAllProductPrices();
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
-        Collections.sort(expectedPrices);
+        expectedPrices.sort(Comparator.naturalOrder());
         Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate crescător!");
 
     }
@@ -255,7 +265,7 @@ public class PerformanceGlitchUserTest extends BaseTest {
         mainPage.filterMenu("hilo");
         List<Double> actualPrices = mainPage.getAllProductPrices();
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
-        Collections.sort(expectedPrices, Collections.reverseOrder());
+        expectedPrices.sort(Comparator.reverseOrder());
         Assert.assertEquals(actualPrices, expectedPrices, "Prețurile sunt sortate descrescător!");
     }
 

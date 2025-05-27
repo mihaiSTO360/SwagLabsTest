@@ -1,5 +1,6 @@
 package org.usertests;
 
+import com.github.javafaker.Faker;
 import org.BaseTest;
 import org.pageobject.CheckoutPage;
 import org.pageobject.LoginPage;
@@ -11,12 +12,14 @@ import org.testng.annotations.Test;
 import java.util.Set;
 
 public class ErrorUserUserTest extends BaseTest {
+    Faker faker;
     LoginPage loginPage;
     MainPage mainPage;
     CheckoutPage checkoutPage;
 
     @BeforeMethod
     public void setUpPages() {
+        faker = new Faker();
         loginPage = new LoginPage(driver);
         mainPage = new MainPage(driver);
         checkoutPage = new CheckoutPage(driver);
@@ -35,6 +38,16 @@ public class ErrorUserUserTest extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
         Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required");
 
+    }
+
+    @Test
+    public void errorUserRandomPasswordLogin() {
+        loginPage.fillUsernameField("error_user");
+        String password = faker.internet().password();
+        loginPage.fillPasswordField(password);
+        loginPage.clickOnLoginButton();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+        Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
     }
 
     @Test
